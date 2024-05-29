@@ -8,7 +8,7 @@ var _components: Dictionary = {}
 
 func _ready():
 	if actor == null:
-		GodotLogger.error("Actor is null")
+		actor = get_parent()
 		return
 
 

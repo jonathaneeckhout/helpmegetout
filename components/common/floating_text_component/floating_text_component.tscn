@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcomdkqapr25s"]
+
+[ext_resource type="Script" path="res://components/common/floating_text_component/floating_text_component.gd" id="1_qlf6x"]
+
+[node name="FloatingTextComponent" type="Node"]
+script = ExtResource("1_qlf6x")

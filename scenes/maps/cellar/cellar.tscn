@@ -1,16 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://clt1fkf4hwe5k"]
+[gd_scene load_steps=10 format=3 uid="uid://clt1fkf4hwe5k"]
 
 [ext_resource type="Script" path="res://classes/map.gd" id="1_wf1ie"]
 [ext_resource type="PackedScene" uid="uid://7rjmbpmyalo6" path="res://scenes/player/player.tscn" id="2_lj7jm"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_1efu8"]
-size = Vector3(50, 0.1, 50)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kq301"]
-albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rqsic"]
-data = PackedVector3Array(-25, 0.05, 25, 25, 0.05, 25, -25, -0.05, 25, 25, 0.05, 25, 25, -0.05, 25, -25, -0.05, 25, 25, 0.05, -25, -25, 0.05, -25, 25, -0.05, -25, -25, 0.05, -25, -25, -0.05, -25, 25, -0.05, -25, 25, 0.05, 25, 25, 0.05, -25, 25, -0.05, 25, 25, 0.05, -25, 25, -0.05, -25, 25, -0.05, 25, -25, 0.05, -25, -25, 0.05, 25, -25, -0.05, -25, -25, 0.05, 25, -25, -0.05, 25, -25, -0.05, -25, 25, 0.05, 25, -25, 0.05, 25, 25, 0.05, -25, -25, 0.05, 25, -25, 0.05, -25, 25, 0.05, -25, -25, -0.05, 25, 25, -0.05, 25, -25, -0.05, -25, 25, -0.05, 25, 25, -0.05, -25, -25, -0.05, -25)
+[ext_resource type="PackedScene" uid="uid://kmaqn8rfv5os" path="res://scenes/enemies/ghost/ghost.tscn" id="3_atc8c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4qty"]
 sky_top_color = Color(0.304965, 0.412343, 0.651355, 1)
@@ -23,8 +15,25 @@ sky_material = SubResource("ProceduralSkyMaterial_u4qty")
 background_mode = 2
 sky = SubResource("Sky_majsj")
 
+[sub_resource type="BoxMesh" id="BoxMesh_1efu8"]
+size = Vector3(50, 0.1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kq301"]
+albedo_color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rqsic"]
+data = PackedVector3Array(-25, 0.05, 25, 25, 0.05, 25, -25, -0.05, 25, 25, 0.05, 25, 25, -0.05, 25, -25, -0.05, 25, 25, 0.05, -25, -25, 0.05, -25, 25, -0.05, -25, -25, 0.05, -25, -25, -0.05, -25, 25, -0.05, -25, 25, 0.05, 25, 25, 0.05, -25, 25, -0.05, 25, 25, 0.05, -25, 25, -0.05, -25, 25, -0.05, 25, -25, 0.05, -25, -25, 0.05, 25, -25, -0.05, -25, -25, 0.05, 25, -25, -0.05, 25, -25, -0.05, -25, 25, 0.05, 25, -25, 0.05, 25, 25, 0.05, -25, -25, 0.05, 25, -25, 0.05, -25, 25, 0.05, -25, -25, -0.05, 25, 25, -0.05, 25, -25, -0.05, -25, 25, -0.05, 25, 25, -0.05, -25, -25, -0.05, -25)
+
 [node name="Cellar" type="Node3D"]
 script = ExtResource("1_wf1ie")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 2.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hct6t")
 
 [node name="Layout" type="Node3D" parent="."]
 
@@ -38,7 +47,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_kq301")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Layout/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rqsic")
 
-[node name="Player" parent="." instance=ExtResource("2_lj7jm")]
+[node name="Players" type="Node3D" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_hct6t")
+[node name="Player" parent="Players" instance=ExtResource("2_lj7jm")]
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Ghost" parent="." instance=ExtResource("3_atc8c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 8)

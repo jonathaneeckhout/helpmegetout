@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://7rjmbpmyalo6"]
+[gd_scene load_steps=13 format=3 uid="uid://7rjmbpmyalo6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w8rou"]
 [ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_acbfh"]
-[ext_resource type="PackedScene" uid="uid://8xv8bgulvth6" path="res://components/camera_component/camera_component.tscn" id="3_rxkgb"]
-[ext_resource type="PackedScene" uid="uid://qn6w11wpqnmn" path="res://components/movement_component/movement_component.tscn" id="3_xlnx1"]
+[ext_resource type="PackedScene" uid="uid://cwu7xuyxdrw62" path="res://scenes/guns/rifle/rifle.tscn" id="2_vubre"]
+[ext_resource type="PackedScene" uid="uid://qn6w11wpqnmn" path="res://components/player/movement_component/movement_component.tscn" id="3_k8uwf"]
+[ext_resource type="PackedScene" uid="uid://8xv8bgulvth6" path="res://components/player/camera_component/camera_component.tscn" id="4_af6ii"]
+[ext_resource type="PackedScene" uid="uid://d3ly1esjdd1r1" path="res://components/common/health_component/health_component.tscn" id="5_3hhyr"]
+[ext_resource type="PackedScene" uid="uid://df5jua3phqvll" path="res://components/player/shoot_component/shoot_component.tscn" id="7_ey8pn"]
+[ext_resource type="Texture2D" uid="uid://c1ogk2rxk6l5m" path="res://assets/ui/crosshair/White/crosshair086.png" id="7_mpo11"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xs4g"]
 
@@ -12,6 +16,8 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b7ca"]
 albedo_color = Color(0.0742637, 0.176516, 0.370612, 1)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_safb8"]
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_w8rou")
 
@@ -19,7 +25,7 @@ script = ExtResource("1_w8rou")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_4xs4g")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Model" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_3flar")
 surface_material_override/0 = SubResource("StandardMaterial3D_8b7ca")
@@ -29,12 +35,53 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2)
+
+[node name="Rifle" parent="Head" instance=ExtResource("2_vubre")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, -0.6)
+
+[node name="HitScan" type="RayCast3D" parent="Head"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, -50)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="HurtBox" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_safb8")
 
 [node name="ComponentList" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("2_acbfh")]
 actor = NodePath("..")
 
-[node name="MovementComponent" parent="ComponentList" instance=ExtResource("3_xlnx1")]
+[node name="MovementComponent" parent="ComponentList" instance=ExtResource("3_k8uwf")]
 
-[node name="CameraComponent" parent="ComponentList" node_paths=PackedStringArray("head") instance=ExtResource("3_rxkgb")]
+[node name="CameraComponent" parent="ComponentList" node_paths=PackedStringArray("head") instance=ExtResource("4_af6ii")]
 head = NodePath("../../Head")
+
+[node name="HealthComponent" parent="ComponentList" instance=ExtResource("5_3hhyr")]
+
+[node name="ShootComponent" parent="ComponentList" node_paths=PackedStringArray("gun", "hit_scan_raycast") instance=ExtResource("7_ey8pn")]
+gun = NodePath("../../Head/Rifle")
+hit_scan_raycast = NodePath("../../Head/HitScan")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CrossHair" type="TextureRect" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_mpo11")

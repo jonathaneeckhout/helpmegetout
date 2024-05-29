@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://kmaqn8rfv5os"]
+
+[ext_resource type="Script" path="res://scenes/enemies/ghost/ghost.gd" id="1_1tdwl"]
+[ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_aol3n"]
+[ext_resource type="PackedScene" uid="uid://d3ly1esjdd1r1" path="res://components/common/health_component/health_component.tscn" id="3_0fcm5"]
+[ext_resource type="PackedScene" uid="uid://dcomdkqapr25s" path="res://components/common/floating_text_component/floating_text_component.tscn" id="4_7qr3s"]
+[ext_resource type="PackedScene" uid="uid://bxpq3pehfwvmq" path="res://scenes/ui/health_bar/health_bar.tscn" id="4_oe77b"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6fhme"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_eea3r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hd44v"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a8mmh"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Ghost" type="CharacterBody3D"]
+script = ExtResource("1_1tdwl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_6fhme")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_eea3r")
+
+[node name="HurtBox" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hd44v")
+
+[node name="ComponentList" parent="." instance=ExtResource("2_aol3n")]
+
+[node name="HealthComponent" parent="ComponentList" instance=ExtResource("3_0fcm5")]
+
+[node name="FloatingTextComponent" parent="ComponentList" instance=ExtResource("4_7qr3s")]
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("_health_component") instance=ExtResource("4_oe77b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+texture = SubResource("ViewportTexture_a8mmh")
+_health_component = NodePath("../ComponentList/HealthComponent")
