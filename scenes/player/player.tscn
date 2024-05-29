@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://7rjmbpmyalo6"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w8rou"]
+[ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_acbfh"]
+[ext_resource type="PackedScene" uid="uid://8xv8bgulvth6" path="res://components/camera_component/camera_component.tscn" id="3_rxkgb"]
+[ext_resource type="PackedScene" uid="uid://qn6w11wpqnmn" path="res://components/movement_component/movement_component.tscn" id="3_xlnx1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xs4g"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3flar"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b7ca"]
+albedo_color = Color(0.0742637, 0.176516, 0.370612, 1)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_w8rou")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_4xs4g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_3flar")
+surface_material_override/0 = SubResource("StandardMaterial3D_8b7ca")
+
+[node name="Head" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2)
+
+[node name="ComponentList" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("2_acbfh")]
+actor = NodePath("..")
+
+[node name="MovementComponent" parent="ComponentList" instance=ExtResource("3_xlnx1")]
+
+[node name="CameraComponent" parent="ComponentList" node_paths=PackedStringArray("head") instance=ExtResource("3_rxkgb")]
+head = NodePath("../../Head")

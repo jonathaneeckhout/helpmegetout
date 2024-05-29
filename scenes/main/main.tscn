@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dju316m0qj18j"]
+
+[ext_resource type="PackedScene" uid="uid://clt1fkf4hwe5k" path="res://scenes/maps/cellar/cellar.tscn" id="1_bxyd7"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Cellar" parent="." instance=ExtResource("1_bxyd7")]
