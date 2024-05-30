@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://kmaqn8rfv5os"]
+[gd_scene load_steps=22 format=3 uid="uid://kmaqn8rfv5os"]
 
 [ext_resource type="Script" path="res://scenes/enemies/ghost/ghost.gd" id="1_1tdwl"]
 [ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_aol3n"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c7c2wr6jplt34" path="res://components/common/despawn_component/despawn_component.tscn" id="5_qqrkq"]
 [ext_resource type="PackedScene" uid="uid://bb66yi38wvanp" path="res://components/behaviors/attack_and_wander_component/attack_and_wander_component.tscn" id="6_max76"]
 [ext_resource type="PackedScene" uid="uid://1521pj7gpq1y" path="res://components/common/update_face_component/update_facing_component.tscn" id="7_g0mdk"]
+[ext_resource type="Script" path="res://scenes/enemies/ghost/AnimationPlayer.gd" id="9_30krp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6fhme"]
 
@@ -34,6 +35,54 @@ radius = 10.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_a8mmh"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Animation" id="Animation_6pqp8"]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.5708, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1, 0), Vector3(0, 0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_rfh4w"]
+resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.261799, 0, 0), Vector3(-0.261799, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c741s"]
+_data = {
+"Attack": SubResource("Animation_rfh4w"),
+"Die": SubResource("Animation_6pqp8")
+}
 
 [node name="Ghost" type="CharacterBody3D"]
 script = ExtResource("1_1tdwl")
@@ -116,3 +165,9 @@ _health_component = NodePath("../ComponentList/HealthComponent")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c741s")
+}
+script = ExtResource("9_30krp")
