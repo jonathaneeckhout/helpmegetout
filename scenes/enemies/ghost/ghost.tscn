@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kmaqn8rfv5os"]
+[gd_scene load_steps=18 format=3 uid="uid://kmaqn8rfv5os"]
 
 [ext_resource type="Script" path="res://scenes/enemies/ghost/ghost.gd" id="1_1tdwl"]
 [ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_aol3n"]
@@ -6,12 +6,31 @@
 [ext_resource type="PackedScene" uid="uid://dcomdkqapr25s" path="res://components/common/floating_text_component/floating_text_component.tscn" id="4_7qr3s"]
 [ext_resource type="PackedScene" uid="uid://bxpq3pehfwvmq" path="res://scenes/ui/health_bar/health_bar.tscn" id="4_oe77b"]
 [ext_resource type="PackedScene" uid="uid://c7c2wr6jplt34" path="res://components/common/despawn_component/despawn_component.tscn" id="5_qqrkq"]
+[ext_resource type="PackedScene" uid="uid://bb66yi38wvanp" path="res://components/behaviors/attack_and_wander_component/attack_and_wander_component.tscn" id="6_max76"]
+[ext_resource type="PackedScene" uid="uid://1521pj7gpq1y" path="res://components/common/update_face_component/update_facing_component.tscn" id="7_g0mdk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6fhme"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_eea3r"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l54xe"]
+radius = 0.1
+height = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_pwpna"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ucibg"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hd44v"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q1lxc"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pboq6"]
+radius = 10.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_a8mmh"]
 viewport_path = NodePath("SubViewport")
@@ -27,14 +46,51 @@ shape = SubResource("CapsuleShape3D_6fhme")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_eea3r")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.4, 0, -0.6)
+mesh = SubResource("CapsuleMesh_l54xe")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.4, 0, -0.6)
+mesh = SubResource("CapsuleMesh_l54xe")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.5, -0.49312)
+mesh = SubResource("SphereMesh_pwpna")
+surface_material_override/0 = SubResource("StandardMaterial3D_ucibg")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.999865, 0, -0.0164054, 0, 1, 0, 0.0164054, 0, 0.999865, 0.2, 0.5, -0.49312)
+mesh = SubResource("SphereMesh_pwpna")
+surface_material_override/0 = SubResource("StandardMaterial3D_ucibg")
+
 [node name="HurtBox" type="Area3D" parent="."]
 unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 0
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_hd44v")
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+collision_layer = 0
+collision_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+shape = SubResource("SphereShape3D_q1lxc")
+
+[node name="AggroBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AggroBox"]
+shape = SubResource("SphereShape3D_pboq6")
 
 [node name="ComponentList" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("2_aol3n")]
 actor = NodePath("..")
@@ -45,7 +101,18 @@ actor = NodePath("..")
 
 [node name="DespawnComponent" parent="ComponentList" instance=ExtResource("5_qqrkq")]
 
+[node name="AttackAndWanderComponent" parent="ComponentList" node_paths=PackedStringArray("aggro_box", "hit_box", "navigation_agent") instance=ExtResource("6_max76")]
+aggro_box = NodePath("../../AggroBox")
+hit_box = NodePath("../../HitBox")
+navigation_agent = NodePath("../../NavigationAgent3D")
+wander_distance = 3.0
+
+[node name="UpdateFacingComponent" parent="ComponentList" instance=ExtResource("7_g0mdk")]
+
 [node name="HealthBar" parent="." node_paths=PackedStringArray("_health_component") instance=ExtResource("4_oe77b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
 texture = SubResource("ViewportTexture_a8mmh")
 _health_component = NodePath("../ComponentList/HealthComponent")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = 0.2
