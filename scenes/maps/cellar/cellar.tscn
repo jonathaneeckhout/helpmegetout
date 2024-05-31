@@ -17,6 +17,8 @@ background_mode = 2
 sky = SubResource("Sky_majsj")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_74s50"]
+vertices = PackedVector3Array(15.5, 0.4, -93.5, 15.5, 0.4, -84.5, 24.5, 0.4, -84.5, 24.5, 0.4, -93.5, 18.5, 0.4, -78.5, 18.5, 0.4, -73.5, 21.5, 0.4, -73.5, 21.5, 0.4, -78.5, -1.5, 0.4, -67.5, -1.5, 0.4, -62.5, 1.5, 0.4, -62.5, 1.5, 0.4, -67.5, 6.5, 0.4, -67.5, 6.5, 0.4, -64.5, 11.5, 0.4, -64.5, 11.5, 0.4, -67.5, 16.5, 0.4, -67.5, 16.5, 0.4, -64.5, 21.5, 0.4, -64.5, 21.5, 0.4, -67.5, -1.5, 0.4, -58.5, -1.5, 0.4, -53.5, 1.5, 0.4, -53.5, 1.5, 0.4, -58.5, -1.5, 0.4, -42.5, -1.5, 0.4, -37.75, 1.5, 0.4, -37.75, 1.5, 0.4, -42.5, -3.25, 0.4, -17.5, -2.75, 0.4, -36.5, -19.5, 0.4, -36.5, -19.5, 0.4, -17.5, -1.5, 0.4, -17.25, -1.5, 0.4, -15.25, 1.5, 0.4, -15.25, 1.5, 0.4, -17.25, -3.25, 0.4, -17.5, -1.5, 0.4, -17.25, 1.5, 0.4, -17.25, 3.25, 0.4, -17.5, 2.25, 0.4, -36.25, -2.75, 0.4, -36.5, 3.25, 0.4, -17.5, 19.5, 0.4, -17.5, 19.5, 0.4, -36.5, 2.25, 0.4, -36.25, 1.5, 0.4, -15.25, -1.5, 0.4, -15.25, -1.5, 0.4, 2.5, 1.5, 0.4, 2.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(11, 10, 8), PackedInt32Array(8, 10, 9), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(23, 22, 20), PackedInt32Array(20, 22, 21), PackedInt32Array(27, 26, 24), PackedInt32Array(24, 26, 25), PackedInt32Array(31, 30, 28), PackedInt32Array(28, 30, 29), PackedInt32Array(35, 34, 32), PackedInt32Array(32, 34, 33), PackedInt32Array(37, 36, 38), PackedInt32Array(38, 36, 39), PackedInt32Array(39, 36, 40), PackedInt32Array(40, 36, 41), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 45), PackedInt32Array(49, 48, 46), PackedInt32Array(46, 48, 47)]
 
 [sub_resource type="BoxMesh" id="BoxMesh_31fes"]
 size = Vector3(4, 0.2, 20)
@@ -52,7 +54,7 @@ data = PackedVector3Array(-5, 0.1, 5, 5, 0.1, 5, -5, -0.1, 5, 5, 0.1, 5, 5, -0.1
 script = ExtResource("1_wf1ie")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 0, 0)
 light_energy = 2.5
 shadow_enabled = true
 
