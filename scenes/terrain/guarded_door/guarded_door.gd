@@ -1,5 +1,5 @@
 class_name GuardedDoor
-extends StaticBody3D
+extends Node3D
 
 @export var guardians: Array[Enemy] = []
 
@@ -14,7 +14,6 @@ func _ready():
 
 func _open():
 	$AnimationPlayer.play("Open")
-	collision_layer = 0
 
 
 func _check_guardians():
