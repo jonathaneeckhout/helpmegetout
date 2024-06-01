@@ -1,6 +1,8 @@
 class_name PlayerRespawnComponent
 extends Component
 
+signal respawned
+
 @export var respawn_time: float = 3.0
 
 var _respawn_timer: Timer = null
@@ -21,6 +23,8 @@ func _ready():
 	_respawn_timer.timeout.connect(_on_respawn_timer_timeout)
 	add_child(_respawn_timer)
 
+func get_respawn_timer_timeleft() -> float:
+	return _respawn_timer.time_left
 
 func _respawn(location: Vector3):
 	actor.hide()
@@ -28,6 +32,8 @@ func _respawn(location: Vector3):
 	actor.position = location
 	actor.velocity = Vector3.ZERO
 	actor.show()
+	
+	respawned.emit()
 
 
 func _on_died():
@@ -37,4 +43,12 @@ func _on_died():
 
 func _on_respawn_timer_timeout():
 	var respawn_location: Vector3 = Game.get_map().find_player_respawn_location(actor.position)
+
+	GodotLogger.info(
+		(
+			"Respawning %s at position (%d,%d,%d)"
+			% [actor.name, respawn_location.x, respawn_location.y, respawn_location.z]
+		)
+	)
+
 	_respawn(respawn_location)
