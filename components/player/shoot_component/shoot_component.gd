@@ -11,6 +11,8 @@ extends Component
 var _shoot_key_pressed: bool = false
 var _shoot_delay_timer: Timer = null
 
+@onready var _health_component: HealthComponent = $"../HealthComponent"
+
 
 func _ready():
 	super._ready()
@@ -30,7 +32,7 @@ func _input(event):
 
 
 func _physics_process(_delta):
-	if _shoot_key_pressed:
+	if _shoot_key_pressed and not _health_component.is_dead:
 		if gun != null:
 			gun.fire()
 

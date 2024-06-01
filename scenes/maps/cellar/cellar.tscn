@@ -203,3 +203,7 @@ actor = NodePath("..")
 
 [node name="FinishArea" parent="." instance=ExtResource("6_dy41w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -89)
+
+[node name="PlayerRespawnLocations" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="PlayerRespawnLocations"]

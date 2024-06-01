@@ -7,6 +7,8 @@ extends Component
 ## Mouse sensitivity of the player.
 @export var mouse_sensitivity: float = 0.4
 
+@onready var _health_component: HealthComponent = $"../HealthComponent"
+
 
 func _ready():
 	super._ready()
@@ -14,6 +16,9 @@ func _ready():
 
 # Handles mouse motion input to rotate the player and look up and down.
 func _input(event):
+	if _health_component.is_dead:
+		return
+
 	if event is InputEventMouseMotion:
 		# Rotate the player around the axis.
 		actor.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))

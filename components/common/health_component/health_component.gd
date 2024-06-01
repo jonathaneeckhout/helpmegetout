@@ -50,5 +50,10 @@ func take_damage(amount: float):
 	set_health(health - amount)
 
 
+func reset():
+	set_health(maximum)
+	is_dead = false
+
+
 func get_health() -> float:
 	return health

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7rjmbpmyalo6"]
+[gd_scene load_steps=19 format=3 uid="uid://7rjmbpmyalo6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w8rou"]
 [ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_acbfh"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://df5jua3phqvll" path="res://components/player/shoot_component/shoot_component.tscn" id="7_ey8pn"]
 [ext_resource type="Texture2D" uid="uid://c1ogk2rxk6l5m" path="res://assets/ui/crosshair/White/crosshair086.png" id="7_mpo11"]
 [ext_resource type="PackedScene" uid="uid://b7a3gyosg3ymq" path="res://components/player/game_component/game_component.tscn" id="8_dtqot"]
+[ext_resource type="PackedScene" uid="uid://dgptmxyni7ttx" path="res://components/player/player_respawn_component/player_respawn_component.tscn" id="9_ougif"]
 [ext_resource type="PackedScene" uid="uid://drceddn00upe3" path="res://scenes/ui/player_meters/player_meters.tscn" id="9_yr32t"]
 [ext_resource type="PackedScene" uid="uid://d4kfshnaoajgu" path="res://scenes/ui/progress_bar/progress_bar.tscn" id="10_1r4me"]
 [ext_resource type="PackedScene" uid="uid://u0nm3k7omjhv" path="res://scenes/ui/ready_check_panel/ready_check_panel.tscn" id="11_64o2p"]
@@ -76,6 +77,8 @@ gun = NodePath("../../Head/Rifle")
 hit_scan_raycast = NodePath("../../Head/HitScan")
 
 [node name="GameComponent" parent="ComponentList" instance=ExtResource("8_dtqot")]
+
+[node name="PlayerRespawnComponent" parent="ComponentList" instance=ExtResource("9_ougif")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
