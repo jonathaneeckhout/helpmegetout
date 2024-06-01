@@ -1,9 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://clt1fkf4hwe5k"]
+[gd_scene load_steps=21 format=3 uid="uid://clt1fkf4hwe5k"]
 
-[ext_resource type="Script" path="res://classes/map.gd" id="1_wf1ie"]
+[ext_resource type="Script" path="res://scenes/maps/cellar/cellar.gd" id="1_vf7wg"]
 [ext_resource type="PackedScene" uid="uid://7rjmbpmyalo6" path="res://scenes/player/player.tscn" id="2_lj7jm"]
 [ext_resource type="PackedScene" uid="uid://kmaqn8rfv5os" path="res://scenes/enemies/ghost/ghost.tscn" id="3_atc8c"]
 [ext_resource type="PackedScene" uid="uid://bkf86aslpsh4m" path="res://scenes/terrain/guarded_door/guarded_door.tscn" id="4_31f85"]
+[ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="5_y4q1j"]
+[ext_resource type="PackedScene" uid="uid://dav77wnnu1do5" path="res://scenes/terrain/finish_area/finish_area.tscn" id="6_dy41w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4qty"]
 sky_top_color = Color(0.304965, 0.412343, 0.651355, 1)
@@ -51,7 +53,7 @@ size = Vector3(10, 0.2, 10)
 data = PackedVector3Array(-5, 0.1, 5, 5, 0.1, 5, -5, -0.1, 5, 5, 0.1, 5, 5, -0.1, 5, -5, -0.1, 5, 5, 0.1, -5, -5, 0.1, -5, 5, -0.1, -5, -5, 0.1, -5, -5, -0.1, -5, 5, -0.1, -5, 5, 0.1, 5, 5, 0.1, -5, 5, -0.1, 5, 5, 0.1, -5, 5, -0.1, -5, 5, -0.1, 5, -5, 0.1, -5, -5, 0.1, 5, -5, -0.1, -5, -5, 0.1, 5, -5, -0.1, 5, -5, -0.1, -5, 5, 0.1, 5, -5, 0.1, 5, 5, 0.1, -5, -5, 0.1, 5, -5, 0.1, -5, 5, 0.1, -5, -5, -0.1, 5, 5, -0.1, 5, -5, -0.1, -5, 5, -0.1, 5, 5, -0.1, -5, -5, -0.1, -5)
 
 [node name="Cellar" type="Node3D"]
-script = ExtResource("1_wf1ie")
+script = ExtResource("1_vf7wg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 0, 0)
@@ -195,3 +197,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -32)
 
 [node name="Ghost4" parent="Enemies" instance=ExtResource("3_atc8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -32)
+
+[node name="ComponentList" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("5_y4q1j")]
+actor = NodePath("..")
+
+[node name="FinishArea" parent="." instance=ExtResource("6_dy41w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -89)

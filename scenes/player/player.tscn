@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://7rjmbpmyalo6"]
+[gd_scene load_steps=15 format=3 uid="uid://7rjmbpmyalo6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w8rou"]
 [ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_acbfh"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://df5jua3phqvll" path="res://components/player/shoot_component/shoot_component.tscn" id="7_ey8pn"]
 [ext_resource type="Texture2D" uid="uid://c1ogk2rxk6l5m" path="res://assets/ui/crosshair/White/crosshair086.png" id="7_mpo11"]
 [ext_resource type="PackedScene" uid="uid://drceddn00upe3" path="res://scenes/ui/player_meters/player_meters.tscn" id="9_yr32t"]
+[ext_resource type="PackedScene" uid="uid://d4kfshnaoajgu" path="res://scenes/ui/progress_bar/progress_bar.tscn" id="10_1r4me"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xs4g"]
 
@@ -98,3 +99,19 @@ theme_override_constants/margin_bottom = 8
 [node name="PlayerMeters" parent="UI/TopLeftMarginContainer" node_paths=PackedStringArray("health_component") instance=ExtResource("9_yr32t")]
 layout_mode = 2
 health_component = NodePath("../../../ComponentList/HealthComponent")
+
+[node name="TopMiddleMarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ProgressBar" parent="UI/TopMiddleMarginContainer" instance=ExtResource("10_1r4me")]
+layout_mode = 2

@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GodotLogger="*res://addons/logger/logger.gd"
 Utils="*res://scripts/singletons/utils.gd"
 Uuid="*res://scripts/singletons/uuid/uuid.gd"
+Game="*res://scripts/singletons/game.gd"
 
 [debug]
 
