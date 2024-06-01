@@ -18,3 +18,13 @@ func register_to_parent_list():
 
 	_component_list = parent
 	_component_list.register_component(self)
+
+
+static func disable_component(component: Component):
+	component.set_physics_process(false)
+	component.set_process_input(false)
+
+
+static func enable_component(component: Component):
+	component.set_physics_process(true)
+	component.set_process_input(true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://7rjmbpmyalo6"]
+[gd_scene load_steps=18 format=3 uid="uid://7rjmbpmyalo6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w8rou"]
 [ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_acbfh"]
@@ -8,8 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://d3ly1esjdd1r1" path="res://components/common/health_component/health_component.tscn" id="5_3hhyr"]
 [ext_resource type="PackedScene" uid="uid://df5jua3phqvll" path="res://components/player/shoot_component/shoot_component.tscn" id="7_ey8pn"]
 [ext_resource type="Texture2D" uid="uid://c1ogk2rxk6l5m" path="res://assets/ui/crosshair/White/crosshair086.png" id="7_mpo11"]
+[ext_resource type="PackedScene" uid="uid://b7a3gyosg3ymq" path="res://components/player/game_component/game_component.tscn" id="8_dtqot"]
 [ext_resource type="PackedScene" uid="uid://drceddn00upe3" path="res://scenes/ui/player_meters/player_meters.tscn" id="9_yr32t"]
 [ext_resource type="PackedScene" uid="uid://d4kfshnaoajgu" path="res://scenes/ui/progress_bar/progress_bar.tscn" id="10_1r4me"]
+[ext_resource type="PackedScene" uid="uid://u0nm3k7omjhv" path="res://scenes/ui/ready_check_panel/ready_check_panel.tscn" id="11_64o2p"]
+[ext_resource type="PackedScene" uid="uid://bpb1e0apuapcw" path="res://scenes/ui/countdown_panel/countdown_panel.tscn" id="13_bxlm8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xs4g"]
 
@@ -72,6 +75,8 @@ head = NodePath("../../Head")
 gun = NodePath("../../Head/Rifle")
 hit_scan_raycast = NodePath("../../Head/HitScan")
 
+[node name="GameComponent" parent="ComponentList" instance=ExtResource("8_dtqot")]
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="CrossHair" type="TextureRect" parent="UI"]
@@ -115,3 +120,20 @@ theme_override_constants/margin_bottom = 8
 
 [node name="ProgressBar" parent="UI/TopMiddleMarginContainer" instance=ExtResource("10_1r4me")]
 layout_mode = 2
+
+[node name="ReadyCheckPanel" parent="UI" node_paths=PackedStringArray("game_component") instance=ExtResource("11_64o2p")]
+game_component = NodePath("../../ComponentList/GameComponent")
+
+[node name="CountdownPanel" parent="UI" instance=ExtResource("13_bxlm8")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -33.0
+offset_right = 78.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2

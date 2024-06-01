@@ -8,11 +8,8 @@ extends Component
 @export var mouse_sensitivity: float = 0.4
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
-
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 # Handles mouse motion input to rotate the player and look up and down.
