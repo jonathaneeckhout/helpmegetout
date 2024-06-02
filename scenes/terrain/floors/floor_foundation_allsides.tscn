@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://t0k0xxf8eupo"]
+
+[ext_resource type="PackedScene" uid="uid://brce1orim23g8" path="res://assets/models/placeholders/KayKit_DungeonRemastered_1.1_FREE/Assets/gltf/floor_foundation_allsides.gltf" id="1_wtafb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lyxod"]
+size = Vector3(2, 2, 2)
+
+[node name="floor_foundation_allsides" instance=ExtResource("1_wtafb")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_foundation_allsides" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_foundation_allsides/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_lyxod")

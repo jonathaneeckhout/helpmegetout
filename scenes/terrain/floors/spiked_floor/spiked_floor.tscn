@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://fqtmadpwir70"]
+
+[ext_resource type="PackedScene" uid="uid://cmjuy20q72ka8" path="res://assets/models/placeholders/KayKit_DungeonRemastered_1.1_FREE/Assets/gltf/floor_tile_big_spikes.gltf" id="1_xwrq8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5p04g"]
+size = Vector3(4, 0.1, 4)
+
+[node name="SpikedFloor" instance=ExtResource("1_xwrq8")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_tile_big_spikes" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_tile_big_spikes/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_5p04g")
