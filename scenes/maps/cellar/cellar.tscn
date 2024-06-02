@@ -665,6 +665,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 [node name="Players" type="Node3D" parent="."]
 
 [node name="Player" parent="Players" instance=ExtResource("2_lj7jm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41)
 
 [node name="Enemies" type="Node3D" parent="."]
 

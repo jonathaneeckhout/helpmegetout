@@ -1,13 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://fqtmadpwir70"]
+[gd_scene load_steps=5 format=3 uid="uid://fqtmadpwir70"]
 
 [ext_resource type="PackedScene" uid="uid://cmjuy20q72ka8" path="res://assets/models/placeholders/KayKit_DungeonRemastered_1.1_FREE/Assets/gltf/floor_tile_big_spikes.gltf" id="1_xwrq8"]
+[ext_resource type="Script" path="res://scenes/terrain/floors/spiked_floor/spiked_floor.gd" id="2_wfy4h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5p04g"]
 size = Vector3(4, 0.1, 4)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_34d2y"]
+size = Vector3(4, 1.5, 4)
+
 [node name="SpikedFloor" instance=ExtResource("1_xwrq8")]
+script = ExtResource("2_wfy4h")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor_tile_big_spikes" index="1"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor_tile_big_spikes/StaticBody3D" index="0"]
 shape = SubResource("BoxShape3D_5p04g")
+
+[node name="KillBox" type="Area3D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_34d2y")

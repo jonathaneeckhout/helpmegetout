@@ -58,5 +58,9 @@ func _physics_process(delta):
 		else:
 			actor.velocity.x = move_toward(actor.velocity.x, 0, run_speed) * delta
 			actor.velocity.z = move_toward(actor.velocity.z, 0, run_speed) * delta
+	# Slow down when dead
+	else:
+		actor.velocity.x = move_toward(actor.velocity.x, 0, run_speed) * delta
+		actor.velocity.z = move_toward(actor.velocity.z, 0, run_speed) * delta
 
 	actor.move_and_slide()

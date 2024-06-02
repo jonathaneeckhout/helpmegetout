@@ -55,5 +55,9 @@ func reset():
 	is_dead = false
 
 
+func kill():
+	take_damage(maximum)
+
+
 func get_health() -> float:
 	return health
