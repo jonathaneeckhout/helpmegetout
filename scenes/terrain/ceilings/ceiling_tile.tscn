@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3pb03ep5xg52"]
+
+[ext_resource type="PackedScene" uid="uid://dff3rxpcfk4l3" path="res://assets/models/placeholders/KayKit_DungeonRemastered_1.1_FREE/Assets/gltf/ceiling_tile.gltf" id="1_4gff4"]
+
+[node name="ceiling_tile" instance=ExtResource("1_4gff4")]
