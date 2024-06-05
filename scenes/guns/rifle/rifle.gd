@@ -5,4 +5,10 @@ extends Gun
 
 
 func fire() -> void:
+	_animation_player.stop()
 	_animation_player.play("Fire")
+
+
+func reload() -> void:
+	_animation_player.stop()
+	_animation_player.play("Reload")

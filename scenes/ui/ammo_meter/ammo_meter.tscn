@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://qqendvb4arsm"]
+
+[ext_resource type="Script" path="res://scenes/ui/ammo_meter/ammo_meter.gd" id="1_j6kxv"]
+
+[node name="AmmoMeter" type="VBoxContainer"]
+script = ExtResource("1_j6kxv")
+
+[node name="Bullets" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "* / *"
+horizontal_alignment = 1

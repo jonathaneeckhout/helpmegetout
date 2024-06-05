@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cwu7xuyxdrw62"]
+[gd_scene load_steps=13 format=3 uid="uid://cwu7xuyxdrw62"]
 
 [ext_resource type="Script" path="res://scenes/guns/rifle/rifle.gd" id="1_nrm7a"]
 
@@ -43,9 +43,50 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0.261799, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_oudor"]
+resource_name = "Reload"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.5708, 0, 0), Vector3(-0.261799, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Magazine:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, -0.3), Vector3(0, -0.6, -0.3), Vector3(0, -0.1, -0.3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Magazine:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sgbct"]
 _data = {
-"Fire": SubResource("Animation_1p6uw")
+"Fire": SubResource("Animation_1p6uw"),
+"Reload": SubResource("Animation_oudor")
 }
 
 [node name="Rifle" type="Node3D"]
@@ -55,22 +96,22 @@ one_shot = false
 
 [node name="Visuals" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+[node name="Barrel" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
 mesh = SubResource("BoxMesh_mx0v1")
 surface_material_override/0 = SubResource("StandardMaterial3D_u6ou1")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Visuals"]
+[node name="Handle" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.0896566, 0)
 mesh = SubResource("BoxMesh_tilje")
 surface_material_override/0 = SubResource("StandardMaterial3D_1xr4b")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Visuals"]
+[node name="Magazine" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.3)
 mesh = SubResource("BoxMesh_5b831")
 surface_material_override/0 = SubResource("StandardMaterial3D_7ymoy")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Visuals"]
+[node name="Vizor" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, -0.4)
 mesh = SubResource("BoxMesh_8wcau")
 surface_material_override/0 = SubResource("StandardMaterial3D_f4eup")

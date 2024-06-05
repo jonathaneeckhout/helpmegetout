@@ -12,7 +12,7 @@ func _ready():
 func _load_map(map_name: String):
 	var map_scene: PackedScene = load("res://scenes/maps/%s/%s.tscn" % [map_name, map_name])
 	var map: Map = map_scene.instantiate()
-	map.name = "map_name"
+	map.name = map_name
 	_maps.add_child(map)
 
 	Game.load_map(map)
