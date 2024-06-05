@@ -5,6 +5,7 @@ signal countdown_stopped
 signal started
 signal stopped
 signal finished(time: float)
+signal exited
 
 const COUNTDOWN_TIME: float = 3.0
 
@@ -52,11 +53,19 @@ func stop() -> bool:
 
 
 func load_map(map: Map):
-	if map != null and map.all_players_finished.is_connected(_on_all_players_finished):
-		map.all_players_finished.disconnect(_on_all_players_finished)
+	clear_map()
 
 	_map = map
 	_map.all_players_finished.connect(_on_all_players_finished)
+
+
+func clear_map():
+	if _map != null and _map.all_players_finished.is_connected(_on_all_players_finished):
+		_map.all_players_finished.disconnect(_on_all_players_finished)
+
+	_map = null
+	time_passed = 0.0
+	_players_ready = 0
 
 
 func get_map() -> Map:

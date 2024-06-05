@@ -5,6 +5,7 @@ extends Node3D
 
 
 func _ready():
+	Game.exited.connect(_on_game_exited)
 	_main_menu.singleplayer_pressed.connect(_on_singleplayer_pressed)
 
 
@@ -15,6 +16,16 @@ func _load_map(map_name: String):
 	_maps.add_child(map)
 
 	Game.load_map(map)
+
+
+func _clear_map():
+	for map in _maps.get_children():
+		map.queue_free()
+
+
+func _on_game_exited():
+	_clear_map()
+	_main_menu.show()
 
 
 func _on_singleplayer_pressed(map: String):

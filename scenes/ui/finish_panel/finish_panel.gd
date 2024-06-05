@@ -1,12 +1,17 @@
 extends PanelContainer
 
+@onready var _exit_button: Button = %ExitButton
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	Game.finished.connect(_on_game_finished)
+	_exit_button.pressed.connect(_on_exit_button_pressed)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _on_game_finished(time: float):
 	%FinishTime.text = "%02d:%02d:%02d" % [floor(time / 60), int(time) % 60, int(time * 100) % 100]
 	show()
+
+
+func _on_exit_button_pressed():
+	Game.exited.emit()

@@ -16,6 +16,7 @@ func _ready():
 
 	Game.started.connect(_on_game_started)
 	Game.stopped.connect(_on_game_stopped)
+	Game.finished.connect(_on_game_finished)
 
 
 func set_ready():
@@ -35,3 +36,9 @@ func _on_game_stopped():
 	await get_tree().create_timer(1).timeout
 	Component.disable_component(_movement_component)
 	Component.disable_component(_shoot_component)
+
+
+func _on_game_finished(_time: float):
+	Component.disable_component(_camera_component)
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
