@@ -1,9 +1,26 @@
 [gd_scene load_steps=3 format=3 uid="uid://dju316m0qj18j"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_8622b"]
-[ext_resource type="PackedScene" uid="uid://clt1fkf4hwe5k" path="res://scenes/maps/cellar/cellar.tscn" id="1_bxyd7"]
+[ext_resource type="PackedScene" uid="uid://b3ogxbctirvum" path="res://scenes/ui/main_menu/main_menu.tscn" id="2_x2ykk"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_8622b")
 
-[node name="Cellar" parent="." instance=ExtResource("1_bxyd7")]
+[node name="Maps" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="UILayer" instance=ExtResource("2_x2ykk")]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.5
+offset_top = -111.0
+offset_right = 135.5
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -638,7 +638,7 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2, 0, -1
 transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, -2, 0, -5)
 
 [node name="wall2" parent="NavigationRegion3D/Layout/Walls" instance=ExtResource("2_0h4mj")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.00848, 0, 3)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 3)
 
 [node name="wall6" parent="NavigationRegion3D/Layout/Walls" instance=ExtResource("2_0h4mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7)
@@ -647,7 +647,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7)
 
 [node name="wall3" parent="NavigationRegion3D/Layout/Walls" instance=ExtResource("2_0h4mj")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.00817, 0, -1)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, -1)
 
 [node name="wall8" parent="NavigationRegion3D/Layout/Walls" instance=ExtResource("2_0h4mj")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.00817, 0, -9)
@@ -997,9 +997,6 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 6, 0, -1
 [node name="wall5" parent="NavigationRegion3D/Layout/Walls" instance=ExtResource("2_0h4mj")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 6, 0, 3)
 
-[node name="wall_half" parent="NavigationRegion3D/Layout/Walls" instance=ExtResource("5_tr7vq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
-
 [node name="wall_half2" parent="NavigationRegion3D/Layout/Walls" instance=ExtResource("5_tr7vq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
 
@@ -1268,12 +1265,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -4, -60)
 [node name="Links" type="Node3D" parent="NavigationRegion3D"]
 
 [node name="NavigationLink3D" type="NavigationLink3D" parent="NavigationRegion3D/Links"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -24)
-end_position = Vector3(0, 0, -2.115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -23.4)
+end_position = Vector3(0, 0, -3)
 
 [node name="NavigationLink3D2" type="NavigationLink3D" parent="NavigationRegion3D/Links"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -27)
-end_position = Vector3(2, 0, 0)
+end_position = Vector3(3, 0, 0)
 
 [node name="Players" type="Node3D" parent="."]
 

@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3ogxbctirvum"]
+
+[ext_resource type="Script" path="res://scenes/ui/main_menu/main_menu.gd" id="1_8oecl"]
+
+[node name="MainMenu" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_8oecl")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="OverView" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/OverView"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Help me get out!"
+horizontal_alignment = 1
+
+[node name="SubTitleLabel" type="Label" parent="MarginContainer/OverView"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Some nights out don't end as intended"
+horizontal_alignment = 1
+
+[node name="SingleplayerButton" type="Button" parent="MarginContainer/OverView"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Singleplayer"
+
+[node name="MultiplayerButton" type="Button" parent="MarginContainer/OverView"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Multiplayer"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/OverView"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/OverView"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
+[node name="SingleplayerOverView" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/SingleplayerOverView"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Select Level"
+horizontal_alignment = 1
+
+[node name="SingleplayerCellarButton" type="Button" parent="MarginContainer/SingleplayerOverView"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cellar"
+
+[node name="SingleplayerBackButton" type="Button" parent="MarginContainer/SingleplayerOverView"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"

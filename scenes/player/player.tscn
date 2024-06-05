@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://7rjmbpmyalo6"]
+[gd_scene load_steps=21 format=3 uid="uid://7rjmbpmyalo6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w8rou"]
 [ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_acbfh"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://u0nm3k7omjhv" path="res://scenes/ui/ready_check_panel/ready_check_panel.tscn" id="11_64o2p"]
 [ext_resource type="PackedScene" uid="uid://bpb1e0apuapcw" path="res://scenes/ui/countdown_panel/countdown_panel.tscn" id="13_bxlm8"]
 [ext_resource type="PackedScene" uid="uid://cn13vg5y0la0d" path="res://scenes/ui/respawn_timer_panel/respawn_timer_panel.tscn" id="15_ymtdb"]
+[ext_resource type="PackedScene" uid="uid://b6rsuhdx8vk1d" path="res://scenes/ui/finish_panel/finish_panel.tscn" id="16_np5i6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xs4g"]
 
@@ -157,3 +158,17 @@ grow_horizontal = 2
 grow_vertical = 2
 health_component = NodePath("../../ComponentList/HealthComponent")
 player_respawn_component = NodePath("../../ComponentList/PlayerRespawnComponent")
+
+[node name="FinishPanel" parent="UI" instance=ExtResource("16_np5i6")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
