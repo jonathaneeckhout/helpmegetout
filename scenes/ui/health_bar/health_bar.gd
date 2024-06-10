@@ -13,7 +13,7 @@ var _actor: Node3D = null
 
 func _ready():
 	_actor = get_parent()
-	%Actor.text = _actor.name
+	%Actor.text = _actor.display_name
 
 	_health_component.health_changed.connect(_on_health_changed)
 

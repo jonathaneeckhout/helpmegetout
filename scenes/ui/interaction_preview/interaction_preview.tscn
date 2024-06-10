@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ny616oflcakx"]
+
+[ext_resource type="Script" path="res://scenes/ui/interaction_preview/interaction_preview.gd" id="1_ebgfg"]
+
+[node name="InteractionPreview" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ebgfg")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Press E to interact with:"
+horizontal_alignment = 1
+
+[node name="Target" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1

@@ -9,6 +9,7 @@ signal multiplayer_pressed
 @onready var _quit_button: Button = %QuitButton
 
 @onready var _singleplayer_cellar_button: Button = %SingleplayerCellarButton
+@onready var _singleplayer_watch_your_steps_button: Button = %SingleplayerWatchYourStepsButton
 @onready var _singleplayer_back_button: Button = %SingleplayerBackButton
 
 
@@ -17,6 +18,9 @@ func _ready():
 	_quit_button.pressed.connect(_on_quit_button_pressed)
 
 	_singleplayer_cellar_button.pressed.connect(_on_singleplayer_cellar_button_pressed)
+	_singleplayer_watch_your_steps_button.pressed.connect(
+		_on_singleplayer_watch_your_steps_button_pressed
+	)
 	_singleplayer_back_button.pressed.connect(_on_singleplayer_back_button_pressed)
 
 
@@ -36,6 +40,11 @@ func _on_quit_button_pressed():
 
 func _on_singleplayer_cellar_button_pressed():
 	singleplayer_pressed.emit("cellar")
+	_reset_view()
+
+
+func _on_singleplayer_watch_your_steps_button_pressed():
+	singleplayer_pressed.emit("watch_your_steps")
 	_reset_view()
 
 

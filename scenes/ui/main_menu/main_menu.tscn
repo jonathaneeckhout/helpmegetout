@@ -66,6 +66,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Cellar"
 
+[node name="SingleplayerWatchYourStepsButton" type="Button" parent="MarginContainer/SingleplayerOverView"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Watch Your Steps"
+
 [node name="SingleplayerBackButton" type="Button" parent="MarginContainer/SingleplayerOverView"]
 unique_name_in_owner = true
 layout_mode = 2

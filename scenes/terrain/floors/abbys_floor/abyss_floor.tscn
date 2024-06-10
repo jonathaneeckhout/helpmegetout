@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6wtkhqmxxyw1"]
+
+[ext_resource type="Script" path="res://scenes/terrain/floors/abbys_floor/abyss_floor.gd" id="1_uo6fo"]
+
+[node name="AbyssFloor" type="Area3D"]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_uo6fo")

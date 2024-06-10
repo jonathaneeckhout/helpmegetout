@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://7rjmbpmyalo6"]
+[gd_scene load_steps=25 format=3 uid="uid://7rjmbpmyalo6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_w8rou"]
 [ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="2_acbfh"]
@@ -12,11 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://dgptmxyni7ttx" path="res://components/player/player_respawn_component/player_respawn_component.tscn" id="9_ougif"]
 [ext_resource type="PackedScene" uid="uid://drceddn00upe3" path="res://scenes/ui/player_meters/player_meters.tscn" id="9_yr32t"]
 [ext_resource type="PackedScene" uid="uid://d4kfshnaoajgu" path="res://scenes/ui/progress_bar/progress_bar.tscn" id="10_1r4me"]
+[ext_resource type="PackedScene" uid="uid://c5v8d5y8tvkfc" path="res://components/player/interact_component/interact_component.tscn" id="10_lf3ff"]
 [ext_resource type="PackedScene" uid="uid://u0nm3k7omjhv" path="res://scenes/ui/ready_check_panel/ready_check_panel.tscn" id="11_64o2p"]
 [ext_resource type="PackedScene" uid="uid://bpb1e0apuapcw" path="res://scenes/ui/countdown_panel/countdown_panel.tscn" id="13_bxlm8"]
 [ext_resource type="PackedScene" uid="uid://qqendvb4arsm" path="res://scenes/ui/ammo_meter/ammo_meter.tscn" id="13_tiykc"]
 [ext_resource type="PackedScene" uid="uid://cn13vg5y0la0d" path="res://scenes/ui/respawn_timer_panel/respawn_timer_panel.tscn" id="15_ymtdb"]
 [ext_resource type="PackedScene" uid="uid://b6rsuhdx8vk1d" path="res://scenes/ui/finish_panel/finish_panel.tscn" id="16_np5i6"]
+[ext_resource type="PackedScene" uid="uid://ny616oflcakx" path="res://scenes/ui/interaction_preview/interaction_preview.tscn" id="19_kpwjk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xs4g"]
 
@@ -24,6 +26,8 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b7ca"]
 albedo_color = Color(0.0742637, 0.176516, 0.370612, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2lmaw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_safb8"]
 
@@ -56,6 +60,16 @@ collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
+[node name="InteractBox" type="Area3D" parent="Head"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1.5)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/InteractBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_2lmaw")
+
 [node name="HurtBox" type="Area3D" parent="."]
 unique_name_in_owner = true
 collision_layer = 2
@@ -82,6 +96,9 @@ hit_scan_raycast = NodePath("../../Head/HitScan")
 [node name="GameComponent" parent="ComponentList" instance=ExtResource("8_dtqot")]
 
 [node name="PlayerRespawnComponent" parent="ComponentList" instance=ExtResource("9_ougif")]
+
+[node name="InteractComponent" parent="ComponentList" node_paths=PackedStringArray("interact_box") instance=ExtResource("10_lf3ff")]
+interact_box = NodePath("../../Head/InteractBox")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -192,3 +209,18 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="InteractionPreview" parent="UI" node_paths=PackedStringArray("interact_component") instance=ExtResource("19_kpwjk")]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -91.5
+offset_top = -50.0
+offset_right = 91.5
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+interact_component = NodePath("../../ComponentList/InteractComponent")

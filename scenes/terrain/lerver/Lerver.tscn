@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://bh026n28sya2c"]
+
+[ext_resource type="Script" path="res://scenes/terrain/lerver/Lerver.gd" id="1_0i2p4"]
+[ext_resource type="PackedScene" uid="uid://b32sendkqscmj" path="res://assets/models/placeholders/KayKit_DungeonRemastered_1.1_FREE/Assets/gltf/box_small.gltf" id="1_wlfab"]
+[ext_resource type="PackedScene" uid="uid://cdbw63crkpo2a" path="res://assets/models/placeholders/KayKit_DungeonRemastered_1.1_FREE/Assets/gltf/torch.gltf" id="2_tu437"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lbx4r"]
+
+[sub_resource type="Animation" id="Animation_tuwuk"]
+resource_name = "Neutral"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeverPivotPoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v3jp3"]
+resource_name = "TurnOff"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeverPivotPoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.436332), Vector3(0, 0, 0.436332)]
+}
+
+[sub_resource type="Animation" id="Animation_awpo7"]
+resource_name = "TurnOn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeverPivotPoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.436332), Vector3(0, 0, -0.436332)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3704"]
+_data = {
+"Neutral": SubResource("Animation_tuwuk"),
+"TurnOff": SubResource("Animation_v3jp3"),
+"TurnOn": SubResource("Animation_awpo7")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x24df"]
+radius = 0.8
+
+[node name="Lerver" type="StaticBody3D"]
+script = ExtResource("1_0i2p4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_lbx4r")
+
+[node name="box_small2" parent="." instance=ExtResource("1_wlfab")]
+
+[node name="LeverPivotPoint" type="Node3D" parent="."]
+transform = Transform3D(0.906308, -0.422618, 0, 0.422618, 0.906308, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="torch2" parent="LeverPivotPoint" instance=ExtResource("2_tu437")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.6, -2.98023e-08, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u3704")
+}
+
+[node name="OperationBox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OperationBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_x24df")

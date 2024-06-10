@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://dadjub3uqootb"]
+
+[ext_resource type="Script" path="res://scenes/terrain/floors/moving_floor/moving_floor.gd" id="1_5omev"]
+[ext_resource type="PackedScene" uid="uid://cl1n87jrugawf" path="res://assets/models/placeholders/KayKit_DungeonRemastered_1.1_FREE/Assets/gltf/floor_wood_large.gltf" id="1_rtxic"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_61p1l"]
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="Animation" id="Animation_kxj81"]
+resource_name = "Move"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path3D/PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7sn0w"]
+_data = {
+"Move": SubResource("Animation_kxj81")
+}
+
+[node name="MovingFloor" type="Node3D"]
+script = ExtResource("1_5omev")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+shape = SubResource("BoxShape3D_61p1l")
+
+[node name="floor_wood_large2" parent="AnimatableBody3D" instance=ExtResource("1_rtxic")]
+
+[node name="Path3D" type="Path3D" parent="."]
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+rotation_mode = 0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Path3D/PathFollow3D"]
+remote_path = NodePath("../../../AnimatableBody3D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7sn0w")
+}
+autoplay = "Move"
