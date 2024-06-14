@@ -4,6 +4,7 @@ extends Node3D
 signal all_players_finished
 
 @onready var players: Node3D = $Players
+@onready var projectiles: Node3D = %Projectiles
 @onready var finish_area: FinishArea = $FinishArea
 @onready var player_respawn_locations = $PlayerRespawnLocations
 

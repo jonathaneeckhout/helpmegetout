@@ -1,0 +1,142 @@
+[gd_scene load_steps=21 format=3 uid="uid://s7kgb1jm2r1v"]
+
+[ext_resource type="Script" path="res://scenes/enemies/nightmare/nightmare.gd" id="1_c3se1"]
+[ext_resource type="PackedScene" uid="uid://bxpq3pehfwvmq" path="res://scenes/ui/health_bar/health_bar.tscn" id="1_m0413"]
+[ext_resource type="PackedScene" uid="uid://6ujxb4xlfsvf" path="res://components/component_list/component_list.tscn" id="3_lmtra"]
+[ext_resource type="PackedScene" uid="uid://d3ly1esjdd1r1" path="res://components/common/health_component/health_component.tscn" id="4_m5p4k"]
+[ext_resource type="PackedScene" uid="uid://dcomdkqapr25s" path="res://components/common/floating_text_component/floating_text_component.tscn" id="5_6ih2h"]
+[ext_resource type="PackedScene" uid="uid://c7c2wr6jplt34" path="res://components/common/despawn_component/despawn_component.tscn" id="6_2nmem"]
+[ext_resource type="PackedScene" uid="uid://cgrxmxnnrc0vb" path="res://components/behaviors/shoot_and_wander_component/shoot_and_wander_component.tscn" id="7_n43ty"]
+[ext_resource type="PackedScene" uid="uid://1521pj7gpq1y" path="res://components/common/update_face_component/update_facing_component.tscn" id="7_xo3en"]
+[ext_resource type="PackedScene" uid="uid://bgyqfd0gmmsaj" path="res://scenes/enemies/nightmare/nightmare_projectile.tscn" id="9_c2l8m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j0dci"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_yo3of"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aoaoq"]
+albedo_color = Color(0.188235, 0.188235, 0.278431, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_t2ceh"]
+radius = 0.02
+height = 0.1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lutmn"]
+radius = 0.1
+height = 0.4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bhi8s"]
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 1
+emission_sphere_radius = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ca7pa"]
+size = Vector3(0.02, 0.02, 0.02)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g66vq"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nyd4u"]
+radius = 20.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nols4"]
+radius = 5.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sg7ia"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Nightmare" type="CharacterBody3D"]
+script = ExtResource("1_c3se1")
+display_name = "Nightmare"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_j0dci")
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+mesh = SubResource("SphereMesh_yo3of")
+surface_material_override/0 = SubResource("StandardMaterial3D_aoaoq")
+
+[node name="Eyes" type="Node3D" parent="Model/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.46)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/MeshInstance3D/Eyes"]
+transform = Transform3D(0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, 0.1, 0.2, 0)
+mesh = SubResource("CapsuleMesh_t2ceh")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/MeshInstance3D/Eyes"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, -0.1, 0.2, 0)
+mesh = SubResource("CapsuleMesh_t2ceh")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model/MeshInstance3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -0.4)
+mesh = SubResource("CapsuleMesh_lutmn")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Model"]
+process_material = SubResource("ParticleProcessMaterial_bhi8s")
+draw_pass_1 = SubResource("BoxMesh_ca7pa")
+
+[node name="HurtBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("SphereShape3D_g66vq")
+
+[node name="AggroBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AggroBox"]
+shape = SubResource("SphereShape3D_nyd4u")
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_nols4")
+
+[node name="ComponentList" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("3_lmtra")]
+actor = NodePath("..")
+
+[node name="HealthComponent" parent="ComponentList" instance=ExtResource("4_m5p4k")]
+health = 250.0
+maximum = 250.0
+
+[node name="FloatingTextComponent" parent="ComponentList" instance=ExtResource("5_6ih2h")]
+
+[node name="DespawnComponent" parent="ComponentList" instance=ExtResource("6_2nmem")]
+
+[node name="UpdateFacingComponent" parent="ComponentList" instance=ExtResource("7_xo3en")]
+
+[node name="ShootAndWanderComponent" parent="ComponentList" node_paths=PackedStringArray("aggro_box", "hit_box", "navigation_agent", "projectile_release_marker") instance=ExtResource("7_n43ty")]
+aggro_box = NodePath("../../AggroBox")
+hit_box = NodePath("../../HitBox")
+navigation_agent = NodePath("../../NavigationAgent3D")
+aggro_movement_speed = 6.0
+minimum_attack_power = 20.0
+maximum_attack_power = 30.0
+projectile_scene = ExtResource("9_c2l8m")
+projectile_release_marker = NodePath("../../ProjectileReleaseMarker")
+wander_speed = 3.0
+wander_distance = 30.0
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("_health_component") instance=ExtResource("1_m0413")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+texture = SubResource("ViewportTexture_sg7ia")
+_health_component = NodePath("../ComponentList/HealthComponent")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = -2.0
+
+[node name="ProjectileReleaseMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.5)

@@ -32,6 +32,7 @@ albedo_color = Color(0.0742637, 0.176516, 0.370612, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_safb8"]
 
 [node name="Player" type="CharacterBody3D"]
+platform_on_leave = 2
 script = ExtResource("1_w8rou")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

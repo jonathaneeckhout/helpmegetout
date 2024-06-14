@@ -16,6 +16,8 @@ func _ready():
 	%Actor.text = _actor.display_name
 
 	_health_component.health_changed.connect(_on_health_changed)
+	
+	update(_health_component.health, _health_component.maximum)
 
 
 func update(amount, full):
@@ -24,8 +26,8 @@ func update(amount, full):
 		progress_bar.texture_progress = YELLOW_BAR
 	if amount < 0.45 * full:
 		progress_bar.texture_progress = RED_BAR
-	progress_bar.value = amount
 	progress_bar.max_value = full
+	progress_bar.value = amount
 
 
 func _on_health_changed(_change_amount: float):

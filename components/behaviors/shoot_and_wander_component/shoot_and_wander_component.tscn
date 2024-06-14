@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgrxmxnnrc0vb"]
+
+[ext_resource type="Script" path="res://components/behaviors/shoot_and_wander_component/shoot_and_wander_component.gd" id="1_gwt8v"]
+
+[node name="ShootAndWanderComponent" type="Node"]
+script = ExtResource("1_gwt8v")
